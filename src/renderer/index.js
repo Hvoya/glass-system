@@ -1,9 +1,9 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 
-import {App} from './App';
+import { App } from './App';
+import { withProviders } from 'hoc/withProviders';
 
-render(
-  <App />,
-  document.getElementById('app')
-);
+const BoostedApp = withProviders(App);
+
+render(<BoostedApp />, document.getElementById('app'));

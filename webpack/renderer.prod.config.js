@@ -1,6 +1,6 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const baseConfig = require('./renderer.base.config');
+const path = require('path')
+const merge = require('webpack-merge')
+const baseConfig = require('./renderer.base.config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -9,4 +9,4 @@ module.exports = merge(baseConfig, {
     path: path.join(__dirname, '../dist'),
     filename: 'renderer.prod.js'
   }
-});
+})

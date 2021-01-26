@@ -1,27 +1,11 @@
 import React from 'react';
 
-import {Header} from './components/Header';
-import {Body} from './components/Body';
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 
-const fs = require('fs');
-alert(fs.readdirSync);
+import Router from './Router';
 
-export class App extends React.PureComponent {
-  render() {
-    return (
-      <div style={styles.container}>
-        <Header/>
-        <Body/>
-      </div>
-    );
-  }
-}
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100vw',
-    height: '100vh'
-  }
-}
+export const App = () => {
+  return <Router />;
+};

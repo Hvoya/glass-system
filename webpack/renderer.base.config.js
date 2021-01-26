@@ -10,39 +10,63 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
-          cacheDirectory: true
-        }
+          cacheDirectory: true,
+        },
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            },
+          },
+        ],
+        exclude: /\.module\.css$/,
       },
       {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
+        test: /\.module.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+        include: /\.module\.css$/,
       },
       {
-        test: /\.(sass|scss)$/,
-        loader: 'style-loader!css-loader!sass-loader'
-      },
-      {
-        test: /\.(ico|gif|png|jpg|jpeg|webp|svg)$/,
+        test: /\.(ico|gif|png|jpg|jpeg|webp|svg|eot|woff|ttf)$/,
         loader: 'file-loader',
         options: {
           limit: 1024,
           name: 'assets/[folder]/[name].[ext]',
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.join(__dirname, '../src/renderer/index.html')
-    })
+      template: path.join(__dirname, '../src/renderer/index.html'),
+    }),
   ],
   node: {
     __dirname: false,
-    __filename: false
-  }
+    __filename: false,
+  },
+  resolve: {
+    extensions: ['.jsx', '.js'],
+    alias: {
+      features: path.resolve(__dirname, '../src/renderer/components/features'),
+      pages: path.resolve(__dirname, '../src/renderer/components/pages'),
+      hoc: path.resolve(__dirname, '../src/renderer/components/hoc'),
+      shared: path.resolve(__dirname, '../src/renderer/components/shared'),
+      '@': path.resolve(__dirname, '../src/renderer'),
+    },
+  },
 };

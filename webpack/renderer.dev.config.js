@@ -1,7 +1,7 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const {spawn} = require('child_process');
-const baseConfig = require('./renderer.base.config');
+const path = require('path')
+const merge = require('webpack-merge')
+const { spawn } = require('child_process')
+const baseConfig = require('./renderer.base.config')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -16,14 +16,14 @@ module.exports = merge(baseConfig, {
     compress: true,
     port: 8080,
     contentBase: path.join(__dirname, '../src/renderer'),
-    after() {
+    after () {
       spawn('npm', ['run', 'start-main'], {
         shell: true,
         env: process.env,
         stdio: 'inherit'
       })
         .on('close', code => process.exit(code))
-        .on('error', spawnError => console.error(spawnError));
+        .on('error', spawnError => console.error(spawnError))
     }
   }
-});
+})
